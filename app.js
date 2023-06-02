@@ -70,12 +70,10 @@ app.use("/api/users", (req, res) => {
       return res.status(418).send("I'm a teapot 🫖");
   }
 });
+const PORT = process.env.PORT || 3030;
 
-const hostname = "127.0.0.1";
-const port = 3680;
-
-app.listen(port, hostname, () => {
-  console.log(`> Ready on http://${hostname}:${port}`);
+app.listen(PORT, () => {
+  console.log(`> Ready on http://PORT:${port}`);
 });
 
 export { app };
