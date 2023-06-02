@@ -11,8 +11,6 @@ import { deleteData } from "./src/deleteData.js";
 
 const app = express();
 
-// const router = express.Router();
-
 // using morgan for logs
 app.use(morgan("combined"));
 app.use(cors());
