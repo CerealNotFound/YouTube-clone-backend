@@ -5,9 +5,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 // import serverless from "serverless-http";
 // import { app, supabase } from "./src/middleware/middleware";
-import { getData } from "./src/getData.js";
-import { postVideos, postFilters, postUsers } from "./src/postData.js";
-import { deleteData } from "./src/deleteData.js";
+import { getData } from "./api/getData.js";
+import { postVideos, postFilters, postUsers } from "./api/postData.js";
+import { deleteData } from "./api/deleteData.js";
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 //   process.env.SUPABASE_KEY
 // );
 
-app.use("/src/videos", (req, res) => {
+app.use("/api/videos", (req, res) => {
   switch (req.method) {
     case "GET":
       getData(req, res, "videos");
@@ -39,7 +39,7 @@ app.use("/src/videos", (req, res) => {
   }
 });
 
-app.use("/src/filters", (req, res) => {
+app.use("/api/filters", (req, res) => {
   switch (req.method) {
     case "GET":
       getData(req, res, "filters");
@@ -55,7 +55,7 @@ app.use("/src/filters", (req, res) => {
   }
 });
 
-app.use("/src/users", (req, res) => {
+app.use("/api/users", (req, res) => {
   switch (req.method) {
     case "GET":
       getData(req, res, "users");

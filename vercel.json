@@ -1,6 +1,0 @@
-{
-  "version": 2,
-  "name": "youtube-clone",
-  "build": [{ "src": "package.json", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/" }]
-}
