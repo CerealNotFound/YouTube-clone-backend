@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "my-express-app",
-  "builds": [{ "src": "package.json", "use": "@vercel/node" }],
+  "name": "youtube-clone",
+  "build": [{ "src": "package.json", "use": "@vercel/node" }],
   "routes": [{ "src": "/(.*)", "dest": "/" }]
 }
