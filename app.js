@@ -73,7 +73,7 @@ app.use("/api/users", (req, res) => {
 const PORT = process.env.PORT || 3030;
 
 app.listen(PORT, () => {
-  console.log(`> Ready on http://PORT:${port}`);
+  console.log(`> Ready on http://PORT:${PORT}`);
 });
 
 export { app };
