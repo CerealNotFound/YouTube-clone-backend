@@ -34,6 +34,8 @@ export const postUsers = async (req, res) => {
     userid: req.body.userid,
     username: req.body.username,
     password: req.body.password,
+    avatar: req.body.avatar,
+    is_verified: req.body.is_verified,
   });
   if (error) {
     return res.status(400).send("posting of users failed");
