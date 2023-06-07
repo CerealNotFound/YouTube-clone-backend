@@ -1,10 +1,8 @@
 import express from "express";
-// import { createClient } from "@supabase/supabase-js";
+import { generateUploadURL } from "./api/uploadHandler.js";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import cors from "cors";
-// import serverless from "serverless-http";
-// import { app, supabase } from "./src/middleware/middleware";
 import { getData } from "./api/getData.js";
 import { postVideos, postFilters, postUsers } from "./api/postData.js";
 import { deleteData } from "./api/deleteData.js";
@@ -70,6 +68,12 @@ app.use("/api/users", (req, res) => {
       return res.status(418).send("I'm a teapot 🫖");
   }
 });
+
+app.get("/s3/upload", async (req, res, file) => {
+  const url = await generateUploadURL();
+  res.send({ url });
+});
+
 const PORT = process.env.PORT || 3030;
 
 app.listen(PORT, () => {
@@ -77,4 +81,3 @@ app.listen(PORT, () => {
 });
 
 export { app };
-// module.exports.handler = serverless(app);
