@@ -37,4 +37,5 @@ export const generateUploadURL = async (file) => {
     console.error("An unknown error occured, failed to generate upload URL");
     return;
   }
+  return uploadURL;
 };
