@@ -19,8 +19,8 @@ const s3 = new aws.S3({
   signatureVersion: "v4",
 });
 
-export const generateUploadURL = async (file) => {
-  const rawBytes = randomBytes(16);
+export const generateUploadURL = async () => {
+  const rawBytes = await randomBytes(16);
   const videoName = rawBytes.toString("hex");
 
   const params = {
@@ -37,5 +37,6 @@ export const generateUploadURL = async (file) => {
     console.error("An unknown error occured, failed to generate upload URL");
     return;
   }
+
   return uploadURL;
 };
