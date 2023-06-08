@@ -25,7 +25,7 @@ export const generateUploadURL = async () => {
 
   const params = {
     Bucket: bucketName,
-    Key: videoName,
+    Key: `${videoName}.mp4`,
     Expires: 60,
   };
 
@@ -33,8 +33,11 @@ export const generateUploadURL = async () => {
 
   try {
     uploadURL = await s3.getSignedUrlPromise("putObject", params);
-  } catch {
-    console.error("An unknown error occured, failed to generate upload URL");
+  } catch (error) {
+    console.error(
+      "An unknown error occured, failed to generate upload URL",
+      error
+    );
     return;
   }
 
