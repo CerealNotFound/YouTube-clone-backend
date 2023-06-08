@@ -69,7 +69,7 @@ app.use("/api/users", (req, res) => {
   }
 });
 
-app.get("/s3/upload", async (req, res) => {
+app.use("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
 });
