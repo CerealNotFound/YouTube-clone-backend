@@ -76,7 +76,7 @@ app
     patchData(req, res, "users");
   });
 
-app.use("/s3/upload", async (req, res) => {
+app.get("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
 });
