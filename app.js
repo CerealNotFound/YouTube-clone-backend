@@ -6,6 +6,7 @@ import cors from "cors";
 import { getData } from "./api/getData.js";
 import { postVideos, postFilters, postUsers } from "./api/postData.js";
 import { deleteData } from "./api/deleteData.js";
+import { patchData } from "./api/patchData.js";
 
 const app = express();
 
@@ -21,57 +22,67 @@ app.use(bodyParser.json());
 //   process.env.SUPABASE_KEY
 // );
 
-app.use("/api/videos", (req, res) => {
-  switch (req.method) {
-    case "GET":
-      getData(req, res, "videos");
-      break;
-    case "POST":
-      postVideos(req, res, "videos");
-      break;
-    case "DELETE":
-      deleteData(req, res, "videos");
-      break;
-    default:
-      return res.status(418).send("I'm a teapot 🫖");
-  }
-});
+//videos
+app
+  .route("/api/videos")
+  .get((req, res) => {
+    getData(req, res, "videos");
+  })
+  .post((req, res) => {
+    postVideos(req, res, "videos");
+  })
+  .delete((req, res) => {
+    deleteData(req, res, "videos");
+  })
+  .patch((req, res) => {
+    patchData(req, res, "videos");
+  });
 
-app.use("/api/filters", (req, res) => {
-  switch (req.method) {
-    case "GET":
-      getData(req, res, "filters");
-      break;
-    case "POST":
-      postFilters(req, res, "filters");
-      break;
-    case "DELETE":
-      deleteData(req, res, "filters");
-      break;
-    default:
-      return res.status(418).send("I'm a teapot 🫖");
-  }
-});
+//filters
+app
+  .route("/api/filters")
+  .get((req, res) => {
+    getData(req, res, "filters");
+  })
 
-app.use("/api/users", (req, res) => {
-  switch (req.method) {
-    case "GET":
-      getData(req, res, "users");
-      break;
-    case "POST":
-      postUsers(req, res, "users");
-      break;
-    case "DELETE":
-      deleteData(req, res, "users");
-      break;
-    default:
-      return res.status(418).send("I'm a teapot 🫖");
-  }
-});
+  .post((req, res) => {
+    postFilters(req, res, "filters");
+  })
 
-app.use("/s3/upload", async (req, res) => {
+  .delete((req, res) => {
+    deleteData(req, res, "filters");
+  })
+
+  .patch((req, res) => {
+    patchData(req, res, "filters");
+  });
+
+//users
+app
+  .route("/api/users")
+  .get((req, res) => {
+    getData(req, res, "users");
+  })
+
+  .post((req, res) => {
+    postUsers(req, res, "users");
+  })
+
+  .delete((req, res) => {
+    deleteData(req, res, "users");
+  })
+
+  .patch((req, res) => {
+    patchData(req, res, "users");
+  });
+
+app.get("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
+});
+
+app.all("*", (req, res) => {
+  res.status(418).send("I'm a teapot 🫖");
 });
 
 const PORT = process.env.PORT || 3030;
