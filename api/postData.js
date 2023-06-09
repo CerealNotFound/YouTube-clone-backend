@@ -12,6 +12,7 @@ export const postVideos = async (req, res) => {
       views: req.body.views,
       uploaded_on: req.body.uploaded_on,
       verified: req.body.verified,
+      video: req.body.video,
     });
     if (error) {
       return res.status(500).send(`posting of video failed`);

@@ -7,6 +7,7 @@ import { getData } from "./api/getData.js";
 import { postVideos, postFilters, postUsers } from "./api/postData.js";
 import { deleteData } from "./api/deleteData.js";
 import { patchData } from "./api/patchData.js";
+import { getCloudfrontUrl } from "./api/getCloudfrontUrl.js";
 
 const app = express();
 
@@ -78,7 +79,12 @@ app
 
 app.get("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
-  res.send({ url });
+  console.log(url);
+  res.send(url);
+});
+
+app.get("/cloudfront/videos", async (req, res) => {
+  res.send(await getCloudfrontUrl(req, res));
 });
 
 app.all("*", (req, res) => {

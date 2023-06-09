@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import aws from "aws-sdk";
-import crypto from "crypto";
 import { promisify } from "util";
+import crypto from "crypto";
 
 const randomBytes = promisify(crypto.randomBytes);
 
@@ -41,5 +41,5 @@ export const generateUploadURL = async () => {
     return;
   }
 
-  return uploadURL;
+  return { uploadURL, videoName };
 };

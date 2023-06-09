@@ -7,12 +7,11 @@ const patchData = async (req, res, table) => {
       .update(req.body.data)
       .eq("id", req.body.id);
 
-    if (!error) {
-      res.status(204).send("record updated successfully🧋");
-    } else {
+    if (error) {
       console.error(error);
-      res.status(500).send(`record update failed ${table}!`);
+      return res.status(500).send(`record update failed ${table}!`);
     }
+    res.status(204).send("record updated successfully🧋");
   } catch (err) {
     console.error(err);
     res.status(500).send(`record update failed in ${table}!`);
