@@ -76,13 +76,13 @@ app
     patchData(req, res, "users");
   });
 
-app.get("/s3/upload", async (req, res) => {
+app.use("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
 });
 
 app.all("*", (req, res) => {
-  res.status(418).send("I'm a teapot 🫖");
+  res.status(418).send("418: I'm a teapot 🫖");
 });
 
 const PORT = process.env.PORT || 3030;
