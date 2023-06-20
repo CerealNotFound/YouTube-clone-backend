@@ -8,6 +8,9 @@ import { postVideos, postFilters, postUsers } from "./api/postData.js";
 import { deleteData } from "./api/deleteData.js";
 import { patchData } from "./api/patchData.js";
 import { getCloudfrontUrl } from "./api/getCloudfrontUrl.js";
+import { authUser } from "./api/authUser.js";
+import { createUser } from "./api/createUser.js";
+import { logout } from "./api/logout.js";
 
 const app = express();
 
@@ -80,11 +83,23 @@ app
 app.use("/s3/upload", async (req, res) => {
   const url = await generateUploadURL();
   console.log(url);
-  res.send(url);
+  res.status(200).send(url);
 });
 
 app.get("/cloudfront/videos", async (req, res) => {
-  res.send(await getCloudfrontUrl(req, res));
+  res.status(200).send(await getCloudfrontUrl(req, res));
+});
+
+app.post("/login", (req, res) => {
+  authUser(req, res);
+});
+
+app.post("/create-account", (req, res) => {
+  createUser(req, res);
+});
+
+app.get("/logout", (req, res) => {
+  logout(req, res);
 });
 
 app.all("*", (req, res) => {
